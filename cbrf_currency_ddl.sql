@@ -6,7 +6,7 @@ CREATE TABLE cbrf.currency(
     valute_charcode CHAR(3) NOT NULL,
     valute_nominal INT NOT NULL,
     valute_name TEXT NOT NULL,
-    valute_value NUMERIC,
+    valute_value NUMERIC NOT NULL,
     valute_load DATE DEFAULT now()::DATE,
     PRIMARY KEY(valute_id, valute_load)
 );
