@@ -15,19 +15,8 @@ try:
 except ImportError as err:
     logging.error(f"Error {err} occured in module {__name__} file: {__file__}")
     sys.exit(2)
-
-
-def read_yaml_config(file: str, section: str) -> dict:
-    with open(file, 'r') as yaml_stream:
-        fd = yaml.full_load(yaml_stream)
-        if section in fd:
-            settings = fd[section]
-            return settings
-        else:
-            logging.error(f"Section {section} not find in the file {file}")
-            sys.exit(2)
-
-
+    
+    
 class SQLClient:
     '''Description SQLClient class'''
     def __init__(self,settings: dict) -> None:
@@ -65,6 +54,17 @@ class SQLClient:
             self.curs.close()
             self.conn.close()
             logging.info(f"Closed connect to database '{self.settings['database']}'on host '{self.settings['host']}'")
+
+
+def read_yaml_config(file: str, section: str) -> dict:
+    with open(file, 'r') as yaml_stream:
+        fd = yaml.full_load(yaml_stream)
+        if section in fd:
+            settings = fd[section]
+            return settings
+        else:
+            logging.error(f"Section {section} not find in the file {file}")
+            sys.exit(2)
 
 
 def current_date_format() -> str:
